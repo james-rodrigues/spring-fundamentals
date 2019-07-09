@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean name="repo"
+		class="com.pluralsight.repository.HibernateCustomerRepositoryImpl" />
+	Setter Injection 
+	<bean name="customerService" class="com.pluralsight.service.CustomerServiceImpl"> 
+		<property name="repo" ref="repo"/> 
+	</bean>
+	Constructor Injection 
+	<bean name="customerService" class="com.pluralsight.service.CustomerServiceImpl"> 
+		<constructor-arg index="0" ref="repo"/> 
+	</bean>
+
+	Constructor Autowiring 
+	<bean name="customerService"
+		class="com.pluralsight.service.CustomerServiceImpl"
+		autowire="constructor" />
+	
+	byName Autowiring - Note : Have the setter name correctly defined as the bean name specified here
+	<bean name="customerService"
+		class="com.pluralsight.service.CustomerServiceImpl"
+		autowire="byName" />
+		
+	<bean name="customerService"
+		class="com.pluralsight.service.CustomerServiceImpl"
+		autowire="byType" scope="prototype"/>
+</beans> -->
+
+<!-- With Properties configuration -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- To allow annotations -->
+	<context:annotation-config/>
+
+	<!-- For XMLConfig and XML Config with Annotations -->
+	<context:property-placeholder location="app.properties"/>
+	<bean name="repo"
+		class="com.pluralsight.repository.HibernateCustomerRepositoryImpl">
+		<!-- For XML Config only <property name="dbUsername" value="${dbUsername}"/> -->
+	</bean>
+			
+	<bean name="customerService"
+		class="com.pluralsight.service.CustomerServiceImpl"
+		autowire="byType" scope="singleton"/>
+</beans>
